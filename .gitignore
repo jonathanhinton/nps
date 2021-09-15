@@ -45,5 +45,5 @@ testem.log
 Thumbs.db
 .env
 parks.json
-/src/server/users.json
-/src/server/badges.json
+users.json
+badges.json
