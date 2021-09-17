@@ -6,6 +6,7 @@ interface Image {
   url: string;
 }
 export interface Park {
+    _id: string;
     fullName: string;
     parkCode: string;
     url: string;
