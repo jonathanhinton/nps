@@ -1,1 +1,5 @@
-<p>park-list works!</p>
+<div class="ui container">
+    <div class="ui grid">
+        <app-park *ngFor="let park of parks" [park]="park"></app-park>
+    </div>
+</div>

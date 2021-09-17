@@ -2,5 +2,9 @@
     "/api": {
         "target": "http://localhost:3000",
         "secure": false
+    },
+    "/parks": {
+        "target": "http://localhost3000",
+        "secure": false
     }
 }

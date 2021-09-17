@@ -24,7 +24,16 @@ module.exports = function (config) {
     jasmineHtmlReporter: {
       suppressAll: true // removes the duplicated traces
     },
-    coverageReporter: {
+    files: [
+      { pattern: './src/client/test.ts', watched: false }
+    ],
+    preprocessors: {
+      './src/client/test.ts': ['@angular/cli']
+    },
+    mime: {
+      'text/x-typescript': ['ts','tsx']
+    },
+coverageReporter: {
       dir: require('path').join(__dirname, './coverage/nps'),
       subdir: '.',
       reporters: [

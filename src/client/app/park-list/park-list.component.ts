@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+// import { Park } from '../shared/park.model';
+import { ApiService } from '../shared/api.service';
 
 @Component({
   selector: 'app-park-list',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ParkListComponent implements OnInit {
 
-  constructor() { }
+  parks: any = [];
+
+  constructor(public api: ApiService) { }
 
   ngOnInit(): void {
+    this.fetchParks()
+  }
+
+  fetchParks() {
+    return this.api.getParks().subscribe((data: {}) => {
+      this.parks = data;
+    })
   }
 
 }
