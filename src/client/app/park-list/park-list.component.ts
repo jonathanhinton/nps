@@ -23,4 +23,5 @@ export class ParkListComponent implements OnInit {
     })
   }
 
+  searchText = '';
 }

@@ -9,13 +9,15 @@ import { ParkListComponent } from './park-list/park-list.component';
 import { ParkComponent } from './park/park.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ApiService } from './shared/api.service';
+import { FilterPipe } from './shared/filter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     ParkListComponent,
     ParkComponent,
-    ProfileComponent
+    ProfileComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

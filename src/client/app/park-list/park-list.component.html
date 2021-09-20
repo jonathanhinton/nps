@@ -1,5 +1,9 @@
 <div class="ui container">
+    <form class="ui big form">
+        <label for="search-text">Search Text</label>
+        <input type="email" class="form-control" id ="search-text" aria-descibedby="search-text" [(ngModel)]="searchText" placeholder = "Enter text to search" autofocus>
+    </form>
     <div class="ui grid">
-        <app-park *ngFor="let park of parks" [park]="park"></app-park>
+        <app-park *ngFor="let park of parks | parkFilter: searchText" [park]="park"></app-park>
     </div>
 </div>
