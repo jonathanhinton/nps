@@ -3,9 +3,9 @@
         <img [src]="park.images[0].url" [alt]="park.images[0].altText">
     </div>
     <div class="content">
-        <a class="header">{{park.fullName}}</a>
+        <a routerLink="/park/{{park._id}}" class="header">{{park.fullName}}</a>
         <div class="description">
-            {{park.description}}
+            {{park.states}}
         </div>
     </div>
 </div>
