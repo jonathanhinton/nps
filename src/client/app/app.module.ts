@@ -10,6 +10,7 @@ import { ParkComponent } from './park/park.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ApiService } from './shared/api.service';
 import { FilterPipe } from './shared/filter.pipe';
+import { ParkDetailComponent } from './park-detail/park-detail.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { FilterPipe } from './shared/filter.pipe';
     ParkListComponent,
     ParkComponent,
     ProfileComponent,
-    FilterPipe
+    FilterPipe,
+    ParkDetailComponent
   ],
   imports: [
     BrowserModule,
