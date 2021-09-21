@@ -1,0 +1,16 @@
+<div *ngIf="park" [id]="park._id" class="ui raised very padded text container segment">
+    <div class="image">
+        <img [src]="park.images[0].url" [alt]="park.images[0].altText">
+    </div>
+    <h1 class="ui header">{{park.fullName}}</h1>
+    <h3 class="ui header"><a [href]="park.url">Website</a></h3>
+    <h2 class="ui header">Park code: {{park.parkCode}}</h2>
+    <p>{{park.description}}</p>
+    <h2 class="ui header">Park Location:</h2>
+    <p>{{park.latLong}}</p>
+    <h2 class="ui header">Weather Info:</h2>
+    <p>{{park.weatherInfo}}</p>
+    <h2 class="ui header">Designation:</h2>
+    <p>{{park.designation}}</p>
+    <p (click)="goBack()">Back to Parks Page</p>
+</div>
