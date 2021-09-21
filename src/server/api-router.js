@@ -2,6 +2,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const checkJwt = require('express-jwt');
+const ObjectId = require('mongodb').ObjectId;
 
 function apiRouter(database) {
     const router = express.Router();
@@ -19,10 +20,23 @@ function apiRouter(database) {
 
     // GET ALL PARKS
     router.get('/parks', (req, res) => {
-        const parksColection = database.collection('parks');
+        const parksCollection = database.collection('parks');
 
-        parksColection.find({}).toArray((err, docs) => {
+        parksCollection.find({}).toArray((err, docs) => {
             return res.json(docs)
+        });
+    });
+
+    // GET park by ID
+    router.get('/parks/:id', (req, res) => {
+        const parksCollection = database.collection('parks');
+        const id = req.params.id;
+        const o_id = new ObjectId(id);
+        parksCollection.findOne(o_id, function(err, result) {
+            if (err) {
+                console.log(err);
+            }
+            return res.json(result);
         });
     });
 
