@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-// import { Park } from '../shared/park.model';
+import { Park } from '../shared/park.model';
 import { ApiService } from '../shared/api.service';
+// import { ActivatedRoute } from '@angular/router';
+// import { Observable } from 'rxjs';
+// import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-park-list',
@@ -9,19 +12,22 @@ import { ApiService } from '../shared/api.service';
 })
 export class ParkListComponent implements OnInit {
 
-  parks: any = [];
+  // selectedId?: string;
+  // parks$?: Observable<Park[]>;
+  parks: Park[] = [];
+  
 
   constructor(public api: ApiService) { }
 
-  ngOnInit(): void {
-    this.fetchParks()
+  ngOnInit() {
+    this.getParks();
   }
 
-  fetchParks() {
-    return this.api.getParks().subscribe((data: {}) => {
-      this.parks = data;
-    })
+  getParks(): void {
+    this.api.getParks()
+    .subscribe(parks => this.parks = parks);
   }
 
   searchText = '';
+
 }
