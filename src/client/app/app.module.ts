@@ -11,6 +11,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { ApiService } from './shared/api.service';
 import { FilterPipe } from './shared/filter.pipe';
 import { ParkDetailComponent } from './park-detail/park-detail.component';
+import { LoginComponent } from './login/login.component';
+import { CreateAccountComponent } from './create-account/create-account.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { ParkDetailComponent } from './park-detail/park-detail.component';
     ParkComponent,
     ProfileComponent,
     FilterPipe,
-    ParkDetailComponent
+    ParkDetailComponent,
+    LoginComponent,
+    CreateAccountComponent
   ],
   imports: [
     BrowserModule,
