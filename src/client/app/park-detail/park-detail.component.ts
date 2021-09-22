@@ -12,7 +12,7 @@ import { ApiService } from '../shared/api.service';
 })
 export class ParkDetailComponent implements OnInit {
   park: Park | undefined;
-  images: Park["images"] | undefined;
+  images: Park["images"] | undefined = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -22,6 +22,7 @@ export class ParkDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPark();
+    this.getImages();
   }
 
   getPark(): void {
@@ -30,6 +31,11 @@ export class ParkDetailComponent implements OnInit {
       .subscribe(park => this.park = park);
   }
 
+  getImages(): void {
+    const id = this.route.snapshot.paramMap.get('id')!;
+    this.api.getPark(id)
+      .subscribe(park => this.images = park.images);
+  }
   goBack(): void {
     this.location.back();
   }
