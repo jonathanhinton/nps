@@ -6,9 +6,9 @@ function createExpressApp(database) {
     const app = express();
     
     app.use(express.static(path.join(__dirname, 'public')));
+    app.use(express.json());
     app.use('/api', apiRouter(database));
     
-    app.use(express.json());
     app.use('*', (req, res) => {
         return res.sendFile(path.join(__dirname, 'public/index.html'));
     });
