@@ -1,6 +1,8 @@
 <div *ngIf="park" [id]="park._id" class="ui raised very padded text container segment">
-    <div class="image">
-        <img [src]="park.images[0].url" [alt]="park.images[0].altText">
+    <div class="ui grid">
+        <div *ngFor="let im of images" class="ui small images">
+            <img [src]="im.url" [alt]="im.altText">
+        </div>
     </div>
     <h1 class="ui header">{{park.fullName}}</h1>
     <h3 class="ui header"><a [href]="park.url">Website</a></h3>
