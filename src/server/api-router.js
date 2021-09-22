@@ -12,11 +12,11 @@ function apiRouter(database) {
     //     checkJwt({ secret: process.env.JWT_SECRET, algorithms: ['RS256'] }).unless({ path: '/api/authenticate'})
     // );
 
-    // router.use((err, req, res, next) => {
-    //     if (err.name === 'UnauthorizedError') {
-    //         res.status(401).send({ error: err.message });
-    //     }
-    // });
+    router.use((err, req, res, next) => {
+        if (err.name === 'UnauthorizedError') {
+            res.status(401).send({ error: err.message });
+        }
+    });
 
     // GET ALL PARKS
     router.get('/parks', (req, res) => {
@@ -42,9 +42,9 @@ function apiRouter(database) {
 
     // GET ALL USERS <-- For Testing purposes
     router.get('/users', (req, res) => {
-        const usersColection = database.collection('users');
+        const usersCollection = database.collection('users');
 
-        usersColection.find({}).toArray((err, docs) => {
+        usersCollection.find({}).toArray((err, docs) => {
             if (err) {
                 console.log(err.message);
             }
@@ -52,12 +52,48 @@ function apiRouter(database) {
         });
     });
 
+    // CREATE NEW USER
+    router.post('/create-account', (req, res) => {
+        const user = req.body;
+        
+        // ENSURE PASSWORD FIELD IS NOT BLANK
+        if (user.password === "") {
+            return res.status(400).send({error: "Password cannot be blank"})
+        }
+
+        // HASH PASSWORD FOR SECURITY
+        const hashed_pwd = user.password = bcrypt.hashSync(user.password, 10);
+
+        // create user object with empty fields to be updated later
+        const user_to_insert = {
+            "username": user.username,
+            "role": "user",
+            "password": hashed_pwd,
+            "avatar": "",
+            "bio": "",
+            "parks_visited":0,
+            "parks": [],
+            "badges": []
+        };
+        const usersCollection = database.collection('users');
+
+        // ENSURE USERNAME IS UNIQUE
+        usersCollection.createIndex({username:1}, {unique:true});
+
+        // INSERT USER INTO THE DATABASE
+        usersCollection.insertOne(user_to_insert, (err, result) => {
+            if (err) {
+                return res.status(400).send({error: err.message})
+            }
+            return res.json(result);
+        });
+    });
+
     // AUTHENTICATE USER
     router.post('/authenticate', (req, res) => {
         const user = req.body;
-
-        const usersColection = database.collection('users');
-        usersColection
+        const usersCollection = database.collection('users');
+        usersCollection
             .findOne({ username: user.username }, (err, result) => {
                 if (!result) {
                     return res.status(404).json({ error: 'user not found' })
