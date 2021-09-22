@@ -9,6 +9,7 @@ import { ParkListComponent } from './park-list/park-list.component';
 import { ParkComponent } from './park/park.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ApiService } from './shared/api.service';
+import { AuthService } from './shared/auth.service';
 import { FilterPipe } from './shared/filter.pipe';
 import { ParkDetailComponent } from './park-detail/park-detail.component';
 import { LoginComponent } from './login/login.component';
@@ -31,7 +32,7 @@ import { CreateAccountComponent } from './create-account/create-account.componen
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [ApiService],
+  providers: [ApiService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,6 +5,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Park } from './park.model';
 import { MessageService } from './message.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,16 +13,18 @@ import { MessageService } from './message.service';
 export class ApiService {
 
   private parksUrl = environment.apiUrl + '/parks';
+  private baseUrl = environment.apiUrl + '/';
 
   constructor(
     private http: HttpClient, 
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private auth: AuthService
+  ) { }
 
-  httpHeader = {
+  httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    // AUTH HEADERS GO HERE
-    // 'Authorization': `Bearer ${this.auth.getToken()
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.auth.getToken()}`
     })
   }
 
@@ -55,6 +58,11 @@ export class ApiService {
         tap(_ => this.log(`fetched park id=${id}`)),
         catchError(this.handleError<Park>(`getPark id=${id}`))
       );
+  }
+
+  // POST Login User
+  loginUser(url: string, body: object): any {
+    return this.http.post(this.baseUrl + url, body, this.httpOptions)
   }
 
 

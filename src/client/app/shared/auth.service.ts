@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
 
-  storageKey: string = "park-explorer-jwt"
+  storageKey: string = "park-explorer-jwt";
 
   constructor(private router: Router) { }
 
