@@ -1,0 +1,15 @@
+<div class="ui menu header">
+    <div class="ui container">
+        <div class="item">
+            <a [routerLink]="['/profile']" aria-label="Profile" *ngIf="auth.isLoggedIn()">
+                <i class="icon user" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div class="header">
+            <h1>Park Explorer</h1>
+        </div>
+        <div class="right menu" *ngIf="auth.isLoggedIn()">
+            <button class="ui primary button logout" (click)="logout()">Logout</button>
+        </div>
+    </div>
+</div>
