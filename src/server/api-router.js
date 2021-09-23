@@ -8,9 +8,9 @@ function apiRouter(database) {
     const router = express.Router();
 
     // AUTH SECURITY --IMPLEMENT AFTER SETTING UP BASIC UI
-    // router.use(
-    //     checkJwt({ secret: process.env.JWT_SECRET, algorithms: ['RS256'] }).unless({ path: '/api/authenticate'})
-    // );
+    router.use(
+        checkJwt({ secret: process.env.JWT_SECRET, algorithms: ['HS256'] }).unless({ path: '/api/authenticate'})
+    );
 
     router.use((err, req, res, next) => {
         if (err.name === 'UnauthorizedError') {
