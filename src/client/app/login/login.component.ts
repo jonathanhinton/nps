@@ -3,8 +3,6 @@ import { ApiService } from '../shared/api.service';
 import { AuthService } from '../shared/auth.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { User } from '../shared/user.model';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
