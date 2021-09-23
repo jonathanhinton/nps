@@ -21,16 +21,15 @@ export class ApiService {
     private auth: AuthService
   ) { }
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${this.auth.getToken()}`
-    })
-  }
-
+  
+  
   // GET all parks from server
   getParks(): Observable<Park[]> {
-    return this.http.get<Park[]>(this.parksUrl)
+    const httpOptions = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.auth.getToken()}`
+    };
+    return this.http.get<Park[]>(this.parksUrl, {headers: httpOptions})
        .pipe(
          catchError(this.handleError<Park[]>('getParks', []))
        );
@@ -38,8 +37,12 @@ export class ApiService {
 
   // GET Park by id. Return 'undefined' if park id not found
   getParkNo404<Data>(id: string): Observable<Park> {
+    const httpOptions = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.auth.getToken()}`
+    };
     const url = `${this.parksUrl}/?id=${id}`;
-    return this.http.get<Park[]>(url)
+    return this.http.get<Park[]>(url, {headers: httpOptions})
       .pipe(
         map(parks => parks[0]),
         tap(p => {
@@ -52,8 +55,12 @@ export class ApiService {
 
   // GET park by id. 404 if id not found
   getPark(id: string): Observable<Park> {
+    const httpOptions = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.auth.getToken()}`
+    };
     const url = `${this.parksUrl}/${id}`;
-    return this.http.get<Park>(url)
+    return this.http.get<Park>(url, {headers: httpOptions})
       .pipe(
         tap(_ => this.log(`fetched park id=${id}`)),
         catchError(this.handleError<Park>(`getPark id=${id}`))
@@ -62,7 +69,7 @@ export class ApiService {
 
   // POST Login User
   loginUser(url: string, body: object): any {
-    return this.http.post(this.baseUrl + url, body, this.httpOptions)
+    return this.http.post(this.baseUrl + url, body)
   }
 
 
