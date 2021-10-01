@@ -21,14 +21,16 @@ export class ApiService {
     private auth: AuthService
   ) { }
 
-  
-  
-  // GET all parks from server
-  getParks(): Observable<Park[]> {
-    const httpOptions = {
+  setHeaders() {
+    return {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${this.auth.getToken()}`
     };
+  }
+  
+  // GET all parks from server
+  getParks(): Observable<Park[]> {
+    const httpOptions = this.setHeaders();
     return this.http.get<Park[]>(this.parksUrl, {headers: httpOptions})
        .pipe(
          catchError(this.handleError<Park[]>('getParks', []))
@@ -37,10 +39,7 @@ export class ApiService {
 
   // GET Park by id. Return 'undefined' if park id not found
   getParkNo404<Data>(id: string): Observable<Park> {
-    const httpOptions = {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${this.auth.getToken()}`
-    };
+    const httpOptions = this.setHeaders();
     const url = `${this.parksUrl}/?id=${id}`;
     return this.http.get<Park[]>(url, {headers: httpOptions})
       .pipe(
@@ -55,10 +54,7 @@ export class ApiService {
 
   // GET park by id. 404 if id not found
   getPark(id: string): Observable<Park> {
-    const httpOptions = {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${this.auth.getToken()}`
-    };
+    const httpOptions = this.setHeaders();
     const url = `${this.parksUrl}/${id}`;
     return this.http.get<Park>(url, {headers: httpOptions})
       .pipe(
