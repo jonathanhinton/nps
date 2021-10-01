@@ -7,7 +7,7 @@ const ObjectId = require('mongodb').ObjectId;
 function apiRouter(database) {
     const router = express.Router();
 
-    // AUTH SECURITY --IMPLEMENT AFTER SETTING UP BASIC UI
+    // AUTH SECURITY
     router.use(
         checkJwt({ secret: process.env.JWT_SECRET, algorithms: ['HS256'] }).unless({ path: '/api/authenticate'})
     );
