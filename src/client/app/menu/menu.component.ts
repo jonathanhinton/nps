@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../shared/auth.service';
+import { ApiService } from '../shared/api.service';
 
 @Component({
   selector: 'app-menu',
@@ -8,13 +9,20 @@ import { AuthService } from '../shared/auth.service';
 })
 export class MenuComponent implements OnInit {
 
-  constructor(public auth: AuthService) { }
+  constructor(
+      private api: ApiService,
+      public auth: AuthService) { }
 
   ngOnInit(): void {
   }
 
   logout() {
     this.auth.logout();
+  }
+
+  // View Profile
+  viewProfile() {
+    // Add logic to show users profile
   }
 
 }

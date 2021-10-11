@@ -63,9 +63,9 @@ export class ApiService {
       );
   }
 
-  // POST Login User
+  // POST Login/Add User
   loginUser(url: string, body: object): any {
-    return this.http.post(this.baseUrl + url, body)
+    return this.http.post(this.baseUrl + url, body);
   }
 
 

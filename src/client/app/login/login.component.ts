@@ -37,4 +37,13 @@ export class LoginComponent implements OnInit {
       })
   }
 
+  createAccountRedirect(form: NgForm) {
+    const values = form.value;
+    const payload = {
+      username: values.username,
+      password: values.password
+    };
+    this.router.navigate(['/create-account']);
+  }
+
 }
